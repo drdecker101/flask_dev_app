@@ -1,20 +1,13 @@
 import re
 
-def convertOMCtoOFX(cid_input):
-    # Convert OMC paths to OFX paths
-
+def convertOMCtoOFX(cid_input):       # Convert OMC paths to OFX paths
     path = cid_input.strip() 
-
     code = "OTE"
-
     pattern = r"^\d{5,6}\.\w{3,4}\.\w+\.\w+$"
-
     match = re.match(pattern, path)
 
     replacer = ["001", "OFX", code, code]
-
-    out = path.split(".")
-
+    out = path.upper().split(".")
     new_out = []
 
     if match :
@@ -23,43 +16,27 @@ def convertOMCtoOFX(cid_input):
             obj_without_last_two_words = j[:-3]
             new_obj = obj_without_last_two_words + replacer[i]
             new_out.append(new_obj)
-
-        # change FLEX or any other type to OFX
-        new_out[1] = replacer[1]
-
+     
+        new_out[1] = replacer[1]     # change FLEX or any other type to OFX
         return ".".join(new_out)
 
-def convertOMCtoGE100L(cid_input, code_input, side_input):
-# Convert OMC paths to GE100L paths
+def convertOMCtoGE100L(cid_input, code_input, side_input):     # Convert OMC paths to GE100L paths
 
-    path = cid_input.strip()
-    # input_example_2 = "93001.FLEX.MNCHTNEMO60.SVVLTNKAO60"
-
-    # type = input("Enter Site Type (e.g. MCR(M), EDR(E)): ").upper()
+    path = cid_input.strip()     # input_example_2 = "93001.FLEX.MNCHTNEMO60.SVVLTNKAO60"
     type = code_input.upper()
-
     site_types = ["MCR", "EDR", "M", "E"]
-
     site_side = ""
-
     type = "EDR" if type not in site_types or type is None else type
-
-    pattern = r"^\d{5,6}\.\w{3,4}\.\w+\.\w+$"
-
-    match = re.match(pattern, path)
-
     site_sides = ["A","Z"]
-
     if type in ["MCR","M"]:
-        # site_side = input("Which side is the MCR site? A side or Z side?: ").upper()
         site_side = side_input.upper()
-
         site_side = "A" if site_side not in site_sides or site_side is None else site_side
 
     replacer = ["001", "GE100L", "1CW", "1CW"]
-
-    out = path.split(".")
-
+    
+    pattern = r"^\d{5,6}\.\w{3,4}\.\w+\.\w+$"
+    match = re.match(pattern, path)
+    out = path.upper().split(".")
     new_out = []
 
     if match :
@@ -73,22 +50,15 @@ def convertOMCtoGE100L(cid_input, code_input, side_input):
                 new_obj = obj_without_last_two_words + replacer[i]
                 new_out.append(new_obj)
 
-        print(site_side)
         if site_side == "A":
             new_out[2] = "MCR01" + new_out[2][:-3]
         elif site_side == "Z":
             new_out[3] = "MCR01" + new_out[3][:-3]   
             new_out[2], new_out[3] = new_out[3], new_out[2]
 
-
-        print("#"*40)
-        print(".".join(new_out))
-        print("#"*40)
-
         return ".".join(new_out)
 
-def replicate(input1, input2, rangeR):
-    
+def replicate(input1, input2, rangeR):    # replicate AE100/AE100 100G
     store = []
     for n in range(rangeR+1):
         if input1 == "BE" and n < 10:
@@ -103,25 +73,18 @@ def replicate(input1, input2, rangeR):
 
     return store
 
-def convertLAGtoTSV(path, ces):
-
-    store = []
-    
-    pattern = r"^\d{5,6}\.\w{4,6}\.\w+\.\w+$"
-
+def convertLAGtoTSV(path, ces):      # Convert LAG paths to TSV paths
+    store = []   
+    pattern = r"^\d{5,6}\.\w{3,6}\.\w+\.\w+$"
     match = re.match(pattern, path)
 
     if match:
-
-        out = path.split(".")
-
+        out = path.upper().split(".")
         tid = out[2]
         np = out[0]
 
         edr_tsv_1 = f"{np}.ME100.{tid}.{tid[:-3]}D0T"
         edr_tsv_2 = f"{int(np)+ 1}.ME100.{tid}.{tid[:-3]}D0T"
-        
-
         ons_tsv = f"{np}.ME100.{tid[:-3]}OTE.{tid[:-3]}D0T"
         tsv_cbo = f"{np}.GE1.{tid[:-3]}01Y.{tid[:-3]}D0T"
         tsv_tsv = f"{np}.ME100.{tid[:-3]}01X.{tid[:-3]}D0T"
@@ -132,13 +95,13 @@ def convertLAGtoTSV(path, ces):
         store.append(f"TSV <> CBO path : {tsv_cbo}\n")
         store.append(f"TSV <> TSV path : {tsv_tsv}\n")
         
-    if ces == "Yes":
-        edr_ces = f"{np}.GE100L.{tid}.{tid[:-3]}2QW"
-        ces_tsv =f"{np}.ME100.{tid[:-3]}2QW.{tid[:-3]}D0T"
+        if ces == "Yes":    
+            edr_ces = f"{np}.GE100L.{tid}.{tid[:-3]}2QW"
+            ces_tsv =f"{np}.ME100.{tid[:-3]}2QW.{tid[:-3]}D0T"
 
-        store.append(f"TSV <> CBO path : {edr_ces}\n")
-        store.append(f"TSV <> CBO path : {ces_tsv}\n")
+            store.append(f"EDR <> CES path : {edr_ces}\n")
+            store.append(f"CES <> TSV path : {ces_tsv}\n")
         
-
-
     return store
+
+
