@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}lagToTsv{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        <br>
+        <h4 align="center">Translate LAG path to TSV</h4>
+        <div class="form-group">
+            <label for="path_cid">Enter path CID</label>
+            <input type="text" class="form-control" id="cid" name="cid" placeholder="e.g. 51001.GE100L.SMVLTXAD1CW.BSTRTX191CW " required/> 
+        </div>
+
+        <label for="ces_switch">Is CES present?</label><br>
+        <div class="input-group">
+            <select name="ces" class="custom-select" id="ces">
+            <option selected>Choose...</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+        </div>
+
+        <br>
+
+
+        <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+    <br>
+
+
+      <form>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Output: </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="14">
+                {% for cid in cids %}{{cid}}
+                {% endfor %}
+            </textarea>
+          </div>
+    </form>
+      
+    
+
+
+
+{% endblock %}

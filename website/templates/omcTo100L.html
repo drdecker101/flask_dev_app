@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}omcToLag{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        <br>
+        <h4 align="center">Translate OMC path to GE100L</h4>
+
+        <div class="form-group">
+            <label for="path_cid">Enter path CID</label>
+            <input type="text" class="form-control" id="cid" name="cid" placeholder="e.g. 73002.FLEX.MCKNTNBKO60.MMVLTN18O60 " onchange='saveValue(this);'/> 
+        </div>
+
+        <label for="path_code">Enter entity code</label><br>
+        <div class="input-group">
+            <select name="code" class="custom-select" id="code" >
+            <option selected>Choose...</option>
+            <option value="EDR">EDR</option>
+            <option value="MCR">MCR</option>
+            </select>
+        </div>
+        <br>
+
+        <label for="mcr_side">Enter MCR side</label><br>
+        <div class="input-group">
+            <select name="side" class="custom-select" id="side" >
+            <option selected>Choose...</option>
+            <option value="A">A</option>
+            <option value="Z">Z</option>
+            </select>
+        </div>
+        <br>
+
+        <br> 
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    <br>
+
+    <label for="Result">Output: </label>
+        <div class="card">
+            <div class="card-body">
+                <p>{{cid}}</p>
+        </div>
+    </div>
+      
+    
+
+
+
+{% endblock %}

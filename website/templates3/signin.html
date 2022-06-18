@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+    {% block title %} Sign In
+{% endblock %}
+
+{% block content %}
+<br><br><br><br><br><br><br><br>
+    <form class="col-lg-4 offset-lg-3"  action="" method="POST">
+    <h1 class="h3 mb-3 text-center font-weight-normal">Sign in</h1>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter username" aria-label="Username" aria-describedby="basic-addon2" required autofocus>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">@gmail.com</span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <!-- <label for="password1">Password</label> -->
+            <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block"> Next</button>
+        <p class="mt-2 mb-6 text-muted text-center">&copy; 2022</p>
+
+      
+    </form>
+{% endblock %}
+

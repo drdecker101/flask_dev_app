@@ -1,0 +1,70 @@
+{% extends "base2.html" %} {% block title %}Changed Me{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        <br>
+        <h4 align="center">Replicate</h4>
+        <!-- <div class="form-group">
+            <label for="lag_id_A">Enter first side</label>
+            <input type="text" class="form-control" id="input1" name="input1" placeholder="AE or BE" onchange='saveValue(this);'/> 
+        </div>
+
+        <div class="form-group">
+            <label for="lag_id_B">Enter second side</label>
+            <input type="text" class="form-control" id="input2" name="input2" placeholder="AE or BE" onchange='saveValue(this);'/> 
+        </div>
+
+        <div class="form-group">
+            <label for="lag_id_B">Enter range</label>
+            <input type="text" class="form-control" id="range1" name="range1" placeholder="Any number " onchange='saveValue(this);'/> 
+        </div> -->
+        
+        
+        <label for="lag_A">Enter first side</label><br>
+        <div class="input-group">
+            <select name="inp1" class="custom-select" id="inp1" >
+              <option selected>Choose...</option>
+              <option value="AE">AE</option>
+              <option value="BE">BE</option>
+            </select>
+        </div>
+        <br>
+        <label for="lag_A">Enter second side</label><br>
+        <div class="input-group">
+            <select name="inp2" class="custom-select" id="inp2">
+            <option selected>Choose...</option>
+            <option value="AE">AE</option>
+            <option value="BE">BE</option>
+            </select>
+        </div>
+        <br>
+
+        <label for="rnage2">Enter range</label><br>
+        <div class="input-group">
+            <select name="range1" class="custom-select" id="range1" >
+            <option selected>Choose...</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+    <br>
+
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Output: </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="11">
+                {% for lag_id in lag_ids %}{{lag_id}}
+                {% endfor %}
+            </textarea>
+          </div>
+    </form>
+      
+    
+
+
+
+{% endblock %}

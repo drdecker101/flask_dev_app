@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}omcToOfx{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        <br>
+        <h4 align="center">Translate OMC path to OFX</h4>
+        <div class="form-group">
+            <label for="path_cid">Enter path CID</label>
+            <input type="text" class="form-control" id="cid" name="cid" placeholder="e.g. 73002.FLEX.MCKNTNBKO60.MMVLTN18O60 " onchange='saveValue(this);'/> 
+        </div>
+
+        <!-- <div class="form-group">
+            <label for="path_code">Enter entity code</label>
+            <input type="text" class="form-control" id="code" name="code" placeholder="e.g OTE or OT1 or OTF" onchange='saveValue(this);'/> 
+        </div> -->
+
+        <br>
+        <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+    <br>
+
+    <label for="Result">Output: </label>
+    <div class="card">
+        <div class="card-body">
+            <p>{{cid}}</p>
+        </div>
+      </div>
+
+      
+
+
+{% endblock %}
